@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id()->autoIncrement();
             $table->string('Name');
             $table->longText('Photo')->nullable();
-            $table->string('VideoFrame')->nullable();
+            $table->longText('VideoFrame')->nullable();
             $table->longText('Discription')->nullable();
             $table->string('Link');
             $table->bigInteger('UserId')->unsigned();

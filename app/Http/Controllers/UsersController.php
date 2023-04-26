@@ -138,4 +138,31 @@ class UsersController extends Controller
         $Users->delete();
         return redirect()->route('users.index')->with('success', 'Users has been deleted successfully');
     }
+
+    public function login()
+    {
+        return view('users.login');
+    }
+    public function CheckLogin(Request $request)
+    {
+        $request->validate([
+            'Email' => 'required|email',
+            'Password' => 'required|string',
+        ]);
+
+        $user = Users::where('email', $request->input('Email'))->where('Password', $request->input('Password'))->where('IsAdmin', 1)->first();
+
+        if ($user != Null) {
+            $request->session()->put('authenticated', true);
+            return redirect()->intended('/');
+        } else {
+            return redirect()->route('users.login');
+        }
+    }
+    public function logout(Request $request)
+    {
+        $request->session()->forget('authenticated');
+        return redirect()->route('users.login');
+    }
+
 }

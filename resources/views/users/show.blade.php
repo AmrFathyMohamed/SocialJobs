@@ -65,8 +65,10 @@
                                             @endif
                                         </p>
                                         <div class="buttons">
-                                            <a href="#" class="btn icon icon-left btn-success btn-sm">Add Social</a>
-                                            <a href="#" class="btn icon icon-left btn-primary  btn-sm">Add Work</a>
+                                            <a href="{{ route('socials.create', $User->id) }}"
+                                                class="btn icon icon-left btn-success btn-sm">Add Social</a>
+                                            <a href="{{ route('businesses.create', $User->id) }}"
+                                                class="btn icon icon-left btn-primary  btn-sm">Add Work</a>
                                         </div>
                                     </div>
                                 </div>
@@ -118,9 +120,17 @@
                                         <a href="{{ $link }}">
                                             <h5 class="mb-0"><i class="{{ $iconClass }}"></i> {{ $title }}</h5>
                                         </a>
-                                        <a href="{{ $link }}">
+                                        {{-- <a href="{{ route('socials.destroy', $item->id) }}">
                                         <i class="fa-sharp fa-solid fa-trash ml-auto" style="color: #ff0000;"></i>
-                                        </a>
+                                        </a> --}}
+                                        <form action="{{ route('socials.destroy', $item->id) }}" method="Post">
+
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn icon icon-left"><i
+                                                    class="fa-sharp fa-solid fa-trash ml-auto"
+                                                    style="color: #ff0000;"></i></button>
+                                        </form>
                                     </li>
                                 @endforeach
                             </ul>
@@ -178,8 +188,18 @@
                                         <div class="card-body">
                                             <div class="d-flex flex-column align-items-center text-center">
                                                 <div class="buttons">
-                                                    <a href="#" class="btn icon icon-left btn-success btn-warning">Edit</a>
-                                                    <a href="#" class="btn icon icon-left btn-primary btn-danger">Delete</a>
+                                                    <form action="{{ route('businesses.destroy', $item->id) }}"
+                                                        method="Post">
+                                                        <a href="{{ route('businesses.edit', $item->id) }}"
+                                                            class="btn icon
+                                                            icon-left btn-success btn-warning">Edit</a>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn icon icon-left"><i
+                                                                class="fa-sharp fa-solid fa-trash ml-auto"
+                                                                style="color: #ff0000;"></i> Delete</button>
+                                                    </form>
+
                                                 </div>
                                                 <div class="mt-3">
                                                     <h4>{{ $item->Name }}</h4>
@@ -199,15 +219,15 @@
                                                         </svg> <a href="{{ $item->Link }}">WorkLink</a></h6>
                                                 </div>
                                                 <div class="mt-1">
-                                                    @if ($User->Photo)
-                                                        <img src="data:image/png;base64,{{ $User->Photo }}"
-                                                            alt="Profile Photo">
+                                                    @if ($item->Photo)
+                                                        <img src="data:image/png;base64,{{ $item->Photo }}"
+                                                            width="250" height="250">
                                                     @endif
                                                 </div>
                                                 <div class="mt-1">
-                                                    @if ($User->VideoFrame)
-                                                        <iframe src="{{ $User->VideoFrame }}" width="150"
-                                                            height="150">
+                                                    @if ($item->VideoFrame)
+                                                        <iframe src="{{ $item->VideoFrame }}" width="250"
+                                                            height="250">
                                                         </iframe>
                                                     @endif
                                                 </div>
