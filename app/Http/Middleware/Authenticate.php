@@ -18,22 +18,10 @@ class Authenticate
     public function handle(Request $request, Closure $next)
     {
         if (!$request->session()->get('authenticated')) {
-            return redirect()->route('users.login');
+            return redirect()->route('users.login')->with('error', 'Error in Email Or Password');
         }
 
         return $next($request);
-    }
-
-    /**
-     * Get the path the user should be redirected to when they are not authenticated.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return string|null
-     */
-    protected function redirectTo($request)
-    {
-        if (!$request->session()->get('authenticated')) {
-            return route('users.login');
-        }
+ 
     }
 }

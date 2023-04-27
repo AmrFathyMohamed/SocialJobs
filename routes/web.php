@@ -14,8 +14,16 @@ Route::post('/users/logout', [UsersController::class, 'logout'])->name('users.lo
 Route::middleware(['auth'])->group(function () {
 
 
-    Route::resource('users', UsersController::class);
-    //Route::resource('socials', SocialsController::class);
+
+    Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [UsersController::class, 'create'])->name('users.create');
+    Route::post('/users', [UsersController::class, 'store'])->name('users.store');
+    Route::get('/users/{id}', [UsersController::class, 'show'])->name('users.show');
+    Route::get('/users/{id}/edit', [UsersController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{id}', [UsersController::class, 'update'])->name('users.update');
+    Route::delete('/users/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
+    
+
     Route::get('/socials/create/{id}', [SocialsController::class, 'create'])->name('socials.create');
     Route::post('/socials', [SocialsController::class, 'store'])->name('socials.store');
     Route::delete('/socials/{id}', [SocialsController::class, 'destroy'])->name('socials.destroy');

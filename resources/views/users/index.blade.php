@@ -66,7 +66,7 @@
                                                   <img src="https://bootdey.com/img/Content/avatar/avatar7.png">
                                                 @endif
                                             </div>
-                                            <p class="font-bold ms-3 mb-0"><a href="{{ route('users.show', $User->id) }}">{{ $User->FullName }}</a></p>
+                                            <p class="font-bold ms-3 mb-0"><a href="#">{{ $User->FullName }}</a></p>
                                         </div>
                                     </td>
 

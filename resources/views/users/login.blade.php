@@ -19,7 +19,11 @@
     <div class="col-lg-5 col-12">
         <div id="auth-left">
             <h1 class="auth-title">Mawqa3y</h1>
-            {{-- <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p> --}}
+            @if ($message = Session::get('error'))
+                    <div class="alert alert-danger">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
 
             <form class="form" action="{{ route('users.CheckLogin') }}" method="POST" enctype="multipart/form-data">
                 @csrf

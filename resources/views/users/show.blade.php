@@ -35,14 +35,15 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
-                                    @if ($User->Photo != null && $User->Photo != '')
-                                        <img src="data:image/png;base64,{{ $User->Photo }}" alt="Mawqa3y"
+                                    
+                                    @if ($User->ProfilePhoto != null && $User->ProfilePhoto != '')
+                                        <img src="data:image/png;base64,{{ $User->ProfilePhoto }}" alt="Mawqa3y"
                                             class="rounded-circle" width="150">
                                     @else
                                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Mawqa3y"
                                             class="rounded-circle" width="150">
                                     @endif
-
+                                    
                                     <div class="mt-3">
                                         <h4>{{ $User->FullName }}</h4>
                                         <p class="text-secondary mb-1">
@@ -58,10 +59,12 @@
                                             </svg> <a href="{{ $User->Link }}"> WebSite</a></h6>
                                         </p>
                                         <p class="text-muted font-size-sm">
+                                            
+                                            
                                             @if ($User->IsAdmin == 1)
-                                                <span class="badge bg-dark">Admin</span>
+                                                <span class="badge bg-dark">Admin <a style="color: white;" class="bi bi-pencil" href="{{ route('users.edit', $User->id) }}"></a></span>
                                             @else
-                                                <span class="badge bg-primary">User</span>
+                                                <span class="badge bg-primary">User <a style="color: white;" class="bi bi-pencil" href="{{ route('users.edit', $User->id) }}"></a></span>
                                             @endif
                                         </p>
                                         <div class="buttons">

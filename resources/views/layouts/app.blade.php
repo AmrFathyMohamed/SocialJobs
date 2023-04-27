@@ -39,13 +39,14 @@
                     <ul class="menu">
 
 
+                        
+                        @if (request()->session()->get('IsAdmin'))
                         <li class="sidebar-item active ">
                             <a href="/" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
-
                         <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-stack"></i>
@@ -57,9 +58,27 @@
                                 </li>
                                 <li class="submenu-item ">
                                     <a href="{{ route('users.create') }}">Create</a>
+                                </li>                                
+                                <li class="submenu-item ">
+                                    <a href="{{ route('users.show',request()->session()->get('LoginID')) }}">My Profile</a>
                                 </li>
                             </ul>
                         </li>
+                        @else
+                        <li class="sidebar-item active ">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Welcome</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item ">
+                            <a href="{{ route('users.show',request()->session()->get('LoginID')) }}" class='sidebar-link'>
+                                <i class="bi bi-person"></i>
+                                <span>My Profile</span>
+                            </a>
+                        </li>
+                        @endif
+                        
 
                         <li class="sidebar-title">
                             <div class="d-flex flex-column align-items-center text-center">
