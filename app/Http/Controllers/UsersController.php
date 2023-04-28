@@ -57,7 +57,7 @@ class UsersController extends Controller
                 'Password' => 'required'
             ]);
             $request->merge([
-                'Link' => 'text=' . $request->input('FullName')
+                'Link' => '' 
             ]);
             $isAdmin = $request->input('IsAdmin') == 'OFF' ? 0 : 1;
             $request->merge(['IsAdmin' => $isAdmin]);
@@ -139,7 +139,7 @@ class UsersController extends Controller
             $isAdmin = $request->input('IsAdmin') == 'ON' ? 1 : 0;
             $request->merge(['IsAdmin' => $isAdmin]);
             $request->merge([
-                'Link' => 'text=' . $request->input('FullName')
+                'Link' => '' . $Users->id
             ]);
 
             if ($request->hasFile('ProfilePhoto')) {
@@ -165,7 +165,7 @@ class UsersController extends Controller
             $request->merge(['IsAdmin' => $Users->IsAdmin]);
             $request->merge(['PhoneNumber' => $Users->PhoneNumber]);
             $request->merge([
-                'Link' => 'text=' . $request->input('FullName')
+                'Link' => '' . $Users->id
             ]);
 
             if ($request->hasFile('ProfilePhoto')) {

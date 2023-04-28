@@ -56,7 +56,7 @@
                                                 <path
                                                     d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
                                                 </path>
-                                            </svg> <a href="{{ $User->Link }}"> WebSite</a></h6>
+                                            </svg> <a href="./{{ $User->Link }}"> WebSite</a></h6>
                                         </p>
                                         <p class="text-muted font-size-sm">
                                             
@@ -174,7 +174,7 @@
                                         <h6 class="mb-0">Link</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        {{ $User->Link }}
+                                       <a href='./{{$User->Link}}'> {{ $User->Link }}</a>
                                     </div>
                                 </div>
                                 <hr>
