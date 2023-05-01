@@ -18,7 +18,7 @@ class SocialFactory extends Factory
     public function definition()
     {
         $excludedUserIds = [1]; // IDs of users to exclude
-        $Links = $this->faker->randomElement(['Facebook','Twitter','Snapchat','WhatsApp','Linkedin','Youtube','Tiktok']);
+        $Links = $this->faker->randomElement(['Facebook','Twitter','Snapchat','WhatsApp','Linkedin','Youtube','Tiktok','Instagram']);
         return [
             'Name' =>$Links,
             'Link' => $this->faker->imageUrl(),

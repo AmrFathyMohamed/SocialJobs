@@ -99,15 +99,15 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="form-group col-12">
+                                        {{-- <div class="form-group col-12">
                                             <div class='form-check'>
                                                 <div class="checkbox">
-                                                    <input type="checkbox" id="IsAdmin" name="IsAdmin"
-                                                        class='form-check-input' checked>
+                                                    <input hidden type="checkbox" id="IsAdmin" name="IsAdmin"
+                                                        class='form-check-input'>
                                                     <label for="checkbox5">Is Admin</label>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="col-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>

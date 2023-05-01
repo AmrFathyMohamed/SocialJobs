@@ -1,8 +1,11 @@
 @extends('layouts.app')
 @section('content')
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="{{ asset('assets/css/icons.css') }}">
     <div class="page-heading">
         <div class="page-title">
             <div class="row">
@@ -36,16 +39,16 @@
                                 <div class="d-flex flex-column align-items-center text-center">
 
                                     @if ($User->ProfilePhoto != null && $User->ProfilePhoto != '')
-                                        <img src="data:image/png;base64,{{ $User->ProfilePhoto }}" alt="Mawq3i"
-                                            class="rounded-circle" style="width: 150px;height: 150px;object-fit: cover;">
+                                        <img src="data:image/png;base64,{{ $User->ProfilePhoto }}" class="rounded-circle"
+                                            style="width: 150px;height: 150px;object-fit: cover;">
                                     @else
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Mawq3i"
-                                            class="rounded-circle" style="width: 150px;height: 150px;object-fit: cover;">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="rounded-circle"
+                                            style="width: 150px;height: 150px;object-fit: cover;">
                                     @endif
 
                                     <div class="mt-3">
                                         <h4>{{ $User->FullName }}</h4>
-                                        <p class="text-secondary mb-1">
+                                        {{-- <p class="text-secondary mb-1">
                                         <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -56,27 +59,83 @@
                                                     d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
                                                 </path>
                                             </svg> <a href="./{{ $User->Link }}"> WebSite</a></h6>
-                                        </p>
+                                        </p> --}}
                                         <p class="text-muted font-size-sm">
-<span class="badge bg-success" ><a style="color: white;" href="{{ route('downloadPhoneNumber') }}"><i class="bi bi-plus-circle"></i> Save</a></span>
+                                            <span class="badge bg-success"><a style="color: white;"
+                                                    href="{{ route('downloadPhoneNumber') }}">
+                                                    Save to Contacts</a></span>
+                                            {{-- <i class="bi bi-plus-circle"></i>  --}}
+                                            @if (request()->session()->get('LoginID') == $User->Link)
+                                                @if ($User->IsAdmin == 1)
+                                                    <span class="badge bg-dark">Edit
 
-                                            @if ($User->IsAdmin == 1)
-                                                <span class="badge bg-dark">Admin
-                                                    @if (request()->session()->get('LoginID') == $User->Link)
                                                         <a style="color: white;" class="bi bi-pencil"
                                                             href="{{ route('users.edit', $User->id) }}"></a>
-                                                            
-                                                    @endif
 
-                                                </span>
-                                            @else
-                                                <span class="badge bg-primary">User @if (request()->session()->get('LoginID') == $User->Link)
+
+                                                    </span>
+                                                @else
+                                                    <span class="badge bg-primary">Edit
                                                         <a style="color: white;" class="bi bi-pencil"
                                                             href="{{ route('users.edit', $User->id) }}"></a>
-                                                    @endif
+                                                @endif
                                                 </span>
                                             @endif
                                         </p>
+                                        <div class="buttonsiconss">
+                                            @foreach ($User->UserSocial as $item)
+                                                @php
+                                                    $link = !empty($item['Link']) ? $item['Link'] : '';
+                                                    switch ($item['Name']) {
+                                                        case 'Facebook':
+                                                            $iconClass = 'fa-brands fa-2x fa-facebook';
+                                                            $title = 'Facebook';
+                                                            break;
+                                                        case 'Twitter':
+                                                            $iconClass = 'fa-brands fa-2x fa-twitter';
+                                                            $title = 'Twitter';
+                                                            break;
+                                                        case 'Snapchat':
+                                                            $iconClass = 'fa-brands fa-2x fa-snapchat';
+                                                            $title = 'Snapchat';
+                                                            break;
+                                                        case 'WhatsApp':
+                                                            $iconClass = 'fa-brands fa-2x fa-whatsapp';
+                                                            $title = 'WhatsApp';
+                                                            break;
+                                                        case 'Linkedin':
+                                                            $iconClass = 'fa-brands fa-2x fa-linkedin';
+                                                            $title = 'Linkedin';
+                                                            break;
+                                                        case 'Youtube':
+                                                            $iconClass = 'fa-brands fa-2x fa-youtube';
+                                                            $title = 'Youtube';
+                                                            break;
+                                                        case 'Tiktok':
+                                                            $iconClass = 'fa-brands fa-2x fa-tiktok';
+                                                            $title = 'Tiktok';
+                                                            break;
+                                                        case 'Instagram':
+                                                            $iconClass = 'fa-brands fa-2x fa-instagram';
+                                                            $title = 'Instagram';
+                                                            break;
+                                                        default:
+                                                            $iconClass = '';
+                                                            $title = '';
+                                                    }
+                                                @endphp
+
+                                                {{-- <li><i
+                                                               class="{{ $iconClass }} "></i></a></li> --}}
+                                                {{-- <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                                                <li><a href="#"><i class="fa fa-codepen"></i></a></li> --}}
+                                                <a style="color: black" href="{{ url($link) }}"><i
+                                                        class="{{ $iconClass }}"></i></a>
+                                                {{-- <i class="fa fa-5x fa-twitter"></i> --}}
+                                            @endforeach
+
+                                        </div>
                                         @if (request()->session()->get('LoginID') == $User->Link)
                                             <div class="buttons">
                                                 <a href="{{ route('socials.create', $User->id) }}"
@@ -89,69 +148,77 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mt-1">
+                        @if (request()->session()->get('LoginID') == $User->Link)
+                            <div class="card mt-1">
 
-                            <ul class="list-group list-group-flush">
+                                <ul class="list-group list-group-flush">
 
 
-                                @foreach ($User->UserSocial as $item)
-                                    @php
-                                        $link = !empty($item['Link']) ? $item['Link'] : '';
-                                        switch ($item['Name']) {
-                                            case 'Facebook':
-                                                $iconClass = 'fa-brands fa-facebook';
-                                                $title = 'Facebook';
-                                                break;
-                                            case 'Twitter':
-                                                $iconClass = 'fa-brands fa-twitter';
-                                                $title = 'Twitter';
-                                                break;
-                                            case 'Snapchat':
-                                                $iconClass = 'fa-brands fa-snapchat';
-                                                $title = 'Snapchat';
-                                                break;
-                                            case 'WhatsApp':
-                                                $iconClass = 'fa-brands fa-whatsapp';
-                                                $title = 'WhatsApp';
-                                                break;
-                                            case 'Linkedin':
-                                                $iconClass = 'fa-brands fa-linkedin';
-                                                $title = 'Linkedin';
-                                                break;
-                                            case 'Youtube':
-                                                $iconClass = 'fa-brands fa-youtube';
-                                                $title = 'Youtube';
-                                                break;
-                                            case 'Tiktok':
-                                                $iconClass = 'fa-brands fa-tiktok';
-                                                $title = 'Tiktok';
-                                                break;
-                                            default:
-                                                $iconClass = '';
-                                                $title = '';
-                                        }
-                                    @endphp
-                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <a href="{{ url($link) }}">
-                                            <h5 class="mb-0"><i class="{{ $iconClass }}"></i> {{ $title }}</h5>
-                                        </a>
-                                        {{-- <a href="{{ route('socials.destroy', $item->id) }}">
+                                    @foreach ($User->UserSocial as $item)
+                                        @php
+                                            $link = !empty($item['Link']) ? $item['Link'] : '';
+                                            switch ($item['Name']) {
+                                                case 'Facebook':
+                                                    $iconClass = 'fa-brands fa-facebook';
+                                                    $title = 'Facebook';
+                                                    break;
+                                                case 'Twitter':
+                                                    $iconClass = 'fa-brands fa-twitter';
+                                                    $title = 'Twitter';
+                                                    break;
+                                                case 'Snapchat':
+                                                    $iconClass = 'fa-brands fa-snapchat';
+                                                    $title = 'Snapchat';
+                                                    break;
+                                                case 'WhatsApp':
+                                                    $iconClass = 'fa-brands fa-whatsapp';
+                                                    $title = 'WhatsApp';
+                                                    break;
+                                                case 'Linkedin':
+                                                    $iconClass = 'fa-brands fa-linkedin';
+                                                    $title = 'Linkedin';
+                                                    break;
+                                                case 'Youtube':
+                                                    $iconClass = 'fa-brands fa-youtube';
+                                                    $title = 'Youtube';
+                                                    break;
+                                                case 'Tiktok':
+                                                    $iconClass = 'fa-brands fa-tiktok';
+                                                    $title = 'Tiktok';
+                                                    break;
+                                                case 'Instagram':
+                                                    $iconClass = 'fa-brands fa-2x fa-instagram';
+                                                    $title = 'Instagram';
+                                                    break;
+                                                default:
+                                                    $iconClass = '';
+                                                    $title = '';
+                                            }
+                                        @endphp
+                                        <li
+                                            class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <a href="{{ url($link) }}">
+                                                <h5 class="mb-0"><i class="{{ $iconClass }}"></i> {{ $title }}
+                                                </h5>
+                                            </a>
+                                            {{-- <a href="{{ route('socials.destroy', $item->id) }}">
                                         <i class="fa-sharp fa-solid fa-trash ml-auto" style="color: #ff0000;"></i>
                                         </a> --}}
-                                        @if (request()->session()->get('LoginID') == $User->Link)
-                                        <form action="{{ route('socials.destroy', $item->id) }}" method="Post">
 
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn icon icon-left"><i
-                                                    class="fa-sharp fa-solid fa-trash ml-auto"
-                                                    style="color: #ff0000;"></i></button>
-                                        </form>
-                                        @endif
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
+                                            <form action="{{ route('socials.destroy', $item->id) }}" method="Post">
+
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn icon icon-left"><i
+                                                        class="fa-sharp fa-solid fa-trash ml-auto"
+                                                        style="color: #ff0000;"></i></button>
+                                            </form>
+
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                     <div class="col-md-9">
                         <div class="card mb-3">
@@ -179,9 +246,10 @@
                                         <h6 class="mb-0">Phone </h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                      <a href='tel:{{ $User->PhoneNumber }}'><i class="bi bi-telephone"></i></a>    {{ $User->PhoneNumber }}                                       
+                                        <a href='tel:{{ $User->PhoneNumber }}'><i class="bi bi-telephone"></i></a>
+                                        {{ $User->PhoneNumber }}
 
-                                        
+
                                     </div>
                                 </div>
                                 <hr>
@@ -208,9 +276,9 @@
                                                     <h4>{{ $item->Name }}</h4>
                                                     <p class="text-muted font-size-sm">{{ $item->Discription }}</p>
                                                     <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="24" height="24" viewBox="0 0 24 24"
-                                                            fill="none" stroke="currentColor" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
                                                             class="feather feather-globe mr-2 icon-inline">
                                                             <circle cx="12" cy="12" r="10">
                                                             </circle>

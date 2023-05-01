@@ -71,8 +71,9 @@ class UsersController extends Controller
             $request->merge([
                 'Password' => $hashedPassword
             ]);
-            $isAdmin = $request->input('IsAdmin') ? true : false;
-            $request->merge(['IsAdmin' => $isAdmin]);
+            // $isAdmin = $request->input('IsAdmin') ? true : false;
+            // $request->merge(['IsAdmin' => $isAdmin]);
+            $request->merge(['IsAdmin' => false]);
 
             if ($request->hasFile('ProfilePhoto')) {
                 $image = $request->file('ProfilePhoto');
@@ -151,8 +152,9 @@ class UsersController extends Controller
                 'Email' => 'required|email|unique:users,email,' . $Users->id,
                 'Link' => 'required|unique:users,Link,' . $Users->id                
             ]);
-            $isAdmin = $request->input('IsAdmin') ? true : false;
-            $request->merge(['IsAdmin' => $isAdmin]);
+            // $isAdmin = $request->input('IsAdmin') ? true : false;
+            // $request->merge(['IsAdmin' => $isAdmin]);
+            $request->merge(['IsAdmin' => false]);
             if ($request->has('Password')) {
                 $hashedPassword = Hash::make($request->input('Password'));
             $request->merge([

@@ -51,6 +51,8 @@
                                                 <option value="Linkedin" title="Linkedin"> <i class="fa-brands fa-linkedin"></i> Linkedin </option>
                                                 <option value="Youtube" title="Youtube"> <i class="fa-brands fa-youtube"></i> Youtube </option>
                                                 <option value="Tiktok" title="Tiktok"> <i class="fa-brands fa-tiktok"></i> Tiktok </option>
+                                                <option value="Instagram" title="Instagram"> <i class="fa-brands fa-instagram"></i> Instagram </option>
+
                                                 </select>
                                             </div>
                                         </div>

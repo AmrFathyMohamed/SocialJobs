@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mawq3i</title>
+    {{-- <title>Mawq3i</title> --}}
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
@@ -18,7 +18,7 @@
 <div class="row h-100">
     <div class="col-lg-5 col-12">
         <div id="auth-left">
-            <h1 class="auth-title text-center">Mawq3i</h1>
+            {{-- <h1 class="auth-title text-center">Mawq3i</h1> --}}
             @if ($message = Session::get('error'))
                     <div class="alert alert-danger">
                         <p>{{ $message }}</p>
