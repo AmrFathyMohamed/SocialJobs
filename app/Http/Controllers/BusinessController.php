@@ -111,9 +111,9 @@ class BusinessController extends Controller
     {
         if (!$request->session()->get('IsAdmin')) {
             $business = business::findOrFail($id);
-            $UserID = $business->UserId;
+            $User = Users::findOrFail($business->UserId);
             $business->delete();
-            $User = Users::find($request->input('UserId'));
+            //$User = Users::find($request->input('UserId'));
             return redirect()->route('users.show', ['username' => $User->Link])->with('success', 'Work has been deleted successfully');
         } else {
             abort(404);

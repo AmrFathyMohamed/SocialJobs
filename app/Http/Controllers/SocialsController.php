@@ -49,9 +49,9 @@ class SocialsController extends Controller
     public function destroy(Request $request,int $id)
     {if (!$request->session()->get('IsAdmin')) {
         $Socials = Social::findOrFail($id);
-        $UserID = $Socials->UserId;
+        $User = Users::findOrFail($Socials->UserId);
         $Socials->delete();
-        $User = Users::find($request->input('UserId'));
+        //$User = Users::find($request->input('UserId'));
             return redirect()->route('users.show', ['username' => $User->Link])->with('success', 'Social Link has been deleted successfully');
     } else {
             abort(404);

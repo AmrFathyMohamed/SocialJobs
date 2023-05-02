@@ -30,7 +30,7 @@ class UsersController extends Controller
             return view('users.index', compact('users'));
         } else {
             // Show only user accounts to non-admin users
-            $user = Users::where('id', $request->session()->get('LoginID'))->first();
+            $user = Users::where('Link', $request->session()->get('LoginID'))->first();
             //$User = Users::find($request->input('UserId'));
             return redirect()->route('users.show', $user->Link);
         }
@@ -188,7 +188,8 @@ class UsersController extends Controller
         } else {
             $request->validate([
                 'Email' => 'required|email|unique:users,email,' . $Users->id,
-                'Password' => 'required'
+                // 'Link' => 'required|unique:users,Link,' . $Users->id     
+                // 'Password' => 'required'
             ]);
             if ($request->has('Password')) {
                 $hashedPassword = Hash::make($request->input('Password'));
